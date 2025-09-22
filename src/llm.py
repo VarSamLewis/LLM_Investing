@@ -3,6 +3,9 @@ import os
 
 class LLM:
     def __init__(self):
+        api_key = os.getenv("ANTHROPIC_API_KEY")
+        if not api_key:
+            raise ValueError("ANTHROPIC_API_KEY environment variable is required")
         self.client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
         self.system_prompt = """ 
         - You review stock data and create estimates based on recent.
